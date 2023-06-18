@@ -7,7 +7,7 @@ import ru.yandex.praktikum.pages.MainPage;
 import ru.yandex.praktikum.pages.OrderScooterPages;
 import java.util.Arrays;
 import java.util.Collection;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
 public class OrderScooterTest extends BaseTest {
@@ -37,7 +37,8 @@ public class OrderScooterTest extends BaseTest {
         this.comment = comment;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "{index}. Test data: name={0}, surname={1}, address={2}, subway={3}," +
+            " phoneNumber={4}, date={5}, button={6}, colour={7}, day={8}, comment={9}")
     public static Collection<Object[]> parameters() {
         return Arrays.asList(new Object[][]{
                 {"Иван", "Глушенков", "ул.Новоалексеевская 18к1", "Алексеевская", "+77778889900",
@@ -67,6 +68,6 @@ public class OrderScooterTest extends BaseTest {
         orderScooterPages.clickOrderDay(day);
         orderScooterPages.typeCommentForCourier(comment);
         orderScooterPages.clickFinalOrderButton();
-        assertEquals(true, orderScooterPages.isModalOrderCompletedDisplayed());
+        assertTrue(orderScooterPages.isModalOrderCompletedDisplayed());
     }
 }
